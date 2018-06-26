@@ -7,6 +7,8 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
+    "server": "pm2 start server/app.js --watch --name 'ticket'",
+    "stop": "pm2 stop ticket",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js"
   },
