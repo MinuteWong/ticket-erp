@@ -20,6 +20,8 @@
     "koa-router": "^7.4.0",
     "koa-session": "^5.8.1",
     "koa-static": "^5.0.0",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.38.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
