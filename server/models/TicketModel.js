@@ -17,7 +17,7 @@ async function GetCity () {
       const cityId = $(this).attr('href').match(/[1-9]\d*/g).join('')
       const cityName = $(this).text()
       cityData.push({
-        city_id: cityId,
+        city_id: Number(cityId),
         city_name: cityName,
         breviary: breviary
       })

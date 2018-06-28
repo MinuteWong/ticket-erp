@@ -1,5 +1,6 @@
 const Router = require('koa-router')
 const TicketModel = require('../models/TicketModel')
+const CityController = require('../controller/city')
 const router = new Router()
 
 router.get('/', async (ctx, next) => {
@@ -7,10 +8,8 @@ router.get('/', async (ctx, next) => {
   next()
 })
 
-router.get('/city', async (ctx, next) => {
-  const result = await TicketModel.GetCity()
-  ctx.body = result
-  next()
-})
+router
+  .get('/city', CityController.getCityList)
+  .post('/city', CityController.changeCity)
 
 module.exports = router

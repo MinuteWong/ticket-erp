@@ -1,10 +1,25 @@
 const sequelize = require('../db')
-const Sequelize = require('sequelize')
+const cityModel = '../schema/city.js'
 
-const City = sequelize.define('city', {
-  breviary: Sequelize.STRING,
-  city_id: Sequelize.STRING,
-  city_name: Sequelize.STRING
-})
+const City = sequelize.import(cityModel)
 
-module.exports = City
+// 插入城市数据
+const createCity = async function (data) {
+  await City.create({
+    city_id: data.city_id,
+    city_name: data.city_name,
+    breviary: data.breviary
+  })
+  return true
+}
+
+// 批量插入城市数据
+const bulkCreateCity = async function (data) {
+  const result = await City.bulkCreate(data)
+  return result
+}
+
+module.exports = {
+  createCity,
+  bulkCreateCity
+}
