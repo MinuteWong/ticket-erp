@@ -30,30 +30,27 @@ async function GetHotFilms () {
   const city = await request({
     url: '/xhgCity.htm',
     method: 'post',
-    data: {cityid: 110100},
-    headers: {
-      'X-Requested-With': 'XMLHttpRequest',
-      cookie: 'JSESSIONKEY=3c54416782734504b42e6bc8daa492ee; JSESSIONID=FACF2FB6BF4805DDA22CCDE2E752D6DE.tomcat2;'
-    }
+    params: { cityid: 310100 }
   })
+
   const result = await request({
     url: '/',
     method: 'get',
-    headers: {cookie: 'JSESSIONKEY=3c54416782734504b42e6bc8daa492ee; JSESSIONID=FACF2FB6BF4805DDA22CCDE2E752D6DE.tomcat2;'}
+    headers: { cookie: city.headers['set-cookie'].join(';') }
   })
   const $ = cheerio.load(result.data)
   const filmListEle = $('head').find('script')
   const sandbox = {}
   vm.createContext(sandbox)
   vm.runInContext(filmListEle.html(), sandbox)
-  return $.html()
+  return sandbox.hotFilms
 }
 
 async function GetCinemaByFilmsId (id) {
   const result = await request({
     url: '/qryCinemssByFilm.htm',
     method: 'post',
-    data: {mid: id}
+    data: { mid: id }
   })
   return result
 }
@@ -87,13 +84,3 @@ module.exports = {
   GetCinemaByFilmsId,
   GetTheatersByCinemaId
 }
-
-// TXT_USER_CITY=440300;
-// Hm_lvt_f3a470502268bd255498a2e6bd23f8d4=1529976777,1529991242;
-// YXTID=4C53018B34D64FA3;
-// JSESSIONKEY=1ed8493963594fa9924a497f32ce9f8d;
-// JSESSIONID=CF8B4BEF35F1087DAD49AB91800FAEA1.tomcat1;
-// Hm_lpvt_f3a470502268bd255498a2e6bd23f8d4=1530174391
-
-// Set-Cookie: JSESSIONKEY=6e2ebc47e510435ab2d7b626e14d80cb; Path=/
-// Set-Cookie: JSESSIONID=0092E9F8AB4CCCCC201EDD5B4EF539CF.tomcat2; Path=/; HttpOnly
