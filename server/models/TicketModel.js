@@ -26,24 +26,18 @@ async function GetCity () {
   return cityData
 }
 
-async function GetHotFilms () {
-  const city = await request({
-    url: '/xhgCity.htm',
-    method: 'post',
-    params: { cityid: 310100 }
-  })
-
+async function GetHotFilms (cookie) {
   const result = await request({
     url: '/',
     method: 'get',
-    headers: { cookie: city.headers['set-cookie'].join(';') }
+    headers: { cookie }
   })
   const $ = cheerio.load(result.data)
   const filmListEle = $('head').find('script')
   const sandbox = {}
   vm.createContext(sandbox)
   vm.runInContext(filmListEle.html(), sandbox)
-  return sandbox.hotFilms
+  return $.html()
 }
 
 async function GetCinemaByFilmsId (id) {
