@@ -38,7 +38,7 @@ app.use(async (ctx, next) => {
 // 初始化地址
 app.use(async (ctx, next) => {
   if (!ctx.session.city) {
-    const addressDetail = await getAddressByIp('123.125.71.38')
+    const addressDetail = await getAddressByIp('113.108.182.52')
     let cityId = 440100
     if (addressDetail.data.city) {
       const result = await CityModel.getCityCodeByIdOrName(addressDetail.data)

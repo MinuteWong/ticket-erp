@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+// rem布局，基于750px设计图，1rem === 100px
+import '@/utils/rem'
 
 Vue.config.productionTip = false
 
