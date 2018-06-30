@@ -38,14 +38,14 @@ app.use(async (ctx, next) => {
 // 初始化地址
 app.use(async (ctx, next) => {
   if (!ctx.session.city) {
-    const addressDetail = await getAddressByIp('113.108.182.52')
+    // const addressDetail = await getAddressByIp('113.108.182.52')
     let cityId = 440100
-    if (addressDetail.data.city) {
-      const result = await CityModel.getCityCodeByIdOrName(addressDetail.data)
-      if (result.city_id) {
-        cityId = result.city_id
-      }
-    }
+    // if (addressDetail.data.city) {
+    //   const result = await CityModel.getCityCodeByIdOrName(addressDetail.data)
+    //   if (result.city_id) {
+    //     cityId = result.city_id
+    //   }
+    // }
     const res = await changeCityById(cityId)
     ctx.session.city = res.headers['set-cookie'].join(';')
   }

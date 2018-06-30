@@ -7,6 +7,8 @@ Vue.use(Router)
 export default new Router({
   routes: [
     { path: '/', redirect: '/home' },
-    { path: '/home', component: _import('HomePage') }
+    { path: '/home', component: _import('HomePage') },
+    { path: '/cinema', component: _import('SelectCinema') },
+    { path: '/theaters', component: _import('Theaters') }
   ]
 })

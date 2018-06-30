@@ -39,7 +39,7 @@ const GetTheatersByCinemaId = async (ctx, next) => {
       d: ctx.query.date
     }
   })
-  ctx.body.data = result
+  ctx.body.data = result.data
   next()
 }
 
